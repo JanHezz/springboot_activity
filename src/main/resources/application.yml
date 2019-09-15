@@ -1,0 +1,77 @@
+# 项目相关配置
+jan:
+  #名称
+  name: fast
+  #版本
+  version: 1.0
+  #版权年份
+  copyrightYear: 2019
+  #头像上传路径
+  profile: D:/profile/
+#tomcat config
+server :
+  port : 8080
+  ##项目名字配置
+  #servlet : 
+  #  context-path : /demo
+  tomcat :
+    max-threads : 128
+    min-spare-threads : 5
+    uri-encoding : UTF-8
+    #shiro 报错修改的地方
+    max-connections: 200000
+    max-http-post-size: 9000000
+spring :
+  # 环境 dev|test|prod
+  ## 关闭activiti自动部署扫描
+  activiti:
+    database-schema-update: false
+    job-executor-activate: true
+    history-level: full
+    check-process-definitions: false
+  ext:
+    database-schema-update: false
+  profiles :
+    active : dev
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      maxFileSize : 10MB
+        #shiro 报错修改的地方
+    max-connections: 200000
+    max-http-post-size: 9000000
+  mvc:   #静态文件
+    static-path-pattern : /static/**
+  thymeleaf:
+    model: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+# mybatisPlus配置
+mybatis-plus:
+  mapper-locations: classpath*:mapping/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.jan.springboot_activity.entity.*
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 3
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #逻辑删除配置（下面3个配置）
+    logic-delete-value: 0
+    logic-not-delete-value: 1
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
